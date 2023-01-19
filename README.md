@@ -26,6 +26,7 @@ Si progetti una o più gerarchie di tipo in Java in modo da supportare le operaz
 indicate sopra. Definire classi e interfacce, le segnature dei metodi, e gli stati
 astratti, specificando il ruolo e protocollo delle classi/interfacce e i contratti dei
 metodi più importanti; implementare lo stato concreto e i metodi.
+
 Valuterò l’elaborato in base alla qualità del progetto e della sua implementazione
 (responsabilità, tipologie, contratti, ADT, parametrizzazione, qualità del body,
 pattern di design, astrazioni, incapsulamento, . . . ). Non leggerò spiegazioni
