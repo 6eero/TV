@@ -1,11 +1,12 @@
 package org.example;
 
-import org.example.emittente.Canale;
-import org.example.emittente.Emittente;
-import org.example.emittente.Trasmissione;
-import org.example.emittente.TrasmissioneFactory;
+import org.example.emittente.*;
 import org.example.tv.TV;
 import org.example.tv.exceptions.CanaleNonTrovatoException;
+import org.example.tv.exceptions.TrasmissioneInvalidaException;
+
+import java.time.LocalTime;
+import java.util.Objects;
 
 /**
 
@@ -41,22 +42,73 @@ import org.example.tv.exceptions.CanaleNonTrovatoException;
  */
 
 public class Main {
-    public static void main(String[] args) throws CanaleNonTrovatoException {
+    public static void main(String[] args) throws CanaleNonTrovatoException, TrasmissioneInvalidaException {
 
         TV tv = new TV();
         Emittente emittente = new Emittente();
 
-        Trasmissione trasmissione1 = TrasmissioneFactory.crea();
+        Trasmissione trasmissione1 = new Trasmissione(
+                LocalTime.of(18, 30),
+                LocalTime.of(20, 00),
+                "Avanti un altro",
+                GenereTrasmissione.show,
+                "Avanti un altro! è una game show televisivo in onda su Canale 5 dal 5 settembre 2011. Il programma – ideato da Paolo Bonolis e Stefano Santucci – nasce per sostituire Chi vuole essere milionario?, lo storico quiz di Gerry Scotti andato in onda per ben undici anni.",
+                Lingua.italiano,
+                null,
+                false
+        );
 
+        Trasmissione trasmissione2 = new Trasmissione(
+                LocalTime.of(20, 00),
+                LocalTime.of(21, 30),
+                "tg5",
+                GenereTrasmissione.informazioni,
+                "Il TG5 è il notiziario di Canale 5, realizzato dall'omonima testata e in onda dal 13 gennaio 1992",
+                Lingua.italiano,
+                null,
+                true
+        );
 
-        emittente.cambiaTrasmissione();
+        Trasmissione trasmissione3 = new Trasmissione(
+                LocalTime.of(20, 00),
+                LocalTime.of(21, 30),
+                "Caduta Libera",
+                GenereTrasmissione.show,
+                "Caduta libera è un game show italiano in onda su Canale 5 dal 4 maggio 2015 nella fascia preserale con la conduzione di Gerry Scotti.",
+                Lingua.italiano,
+                null,
+                false
+        );
 
-        emittente.aggiungiTrasmissione();
+        Trasmissione trasmissione4 = new Trasmissione(
+                LocalTime.of(20, 00),
+                LocalTime.of(23, 30),
+                "Juventus - Lecce",
+                GenereTrasmissione.informazioni,
+                "Il TG5 è il notiziario di Canale 5, realizzato dall'omonima testata e in onda dal 13 gennaio 1992",
+                Lingua.italiano,
+                null,
+                true
+        );
 
+        Canale canale1 = new Canale(1, "rai1");
+        Canale canale4 = new Canale(4, "rete4");
+        Canale canale5 = new Canale(5, "canale5");
+        tv.aggiungiCanale(canale1);
+        tv.aggiungiCanale(canale4);
+        tv.aggiungiCanale(canale5);
 
-        tv.visionaTrasmissione(6);
+        emittente.aggiungiTrasmissione(canale5, trasmissione1);
+        emittente.aggiungiTrasmissione(canale5, trasmissione2);
+        emittente.aggiungiTrasmissione(canale1, trasmissione3);
 
-        tv.cercaTrasmissione();
+        //.out.println(emittente.getListaDiTutteLeTrasmissioni());
+
+        //emittente.cambiaTrasmissione(canale5, trasmissione2, trasmissione4);
+
+        //.visionaTrasmissione(5);
+
+        //System.out.println(tv.cercaTrasmissione("Avanti un altro", emittente.getListaDiTutteLeTrasmissioni()));
 
     }
 }
